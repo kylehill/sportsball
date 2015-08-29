@@ -50,8 +50,8 @@
     this.injury = function(amount) {
       amount = amount || 0
 
-      _min = _min - amount
-      _max = _max - amount
+      _min = Math.max(_min - amount, 1)
+      _max = Math.max(_max - amount, 1)
       _xp = Math.max(_xp - amount, 0)
     }
 
