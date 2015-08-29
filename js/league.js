@@ -3,5 +3,5 @@
 })(this);
 
 if (typeof module !== "undefined") {
-  module.exports = this.EventCapture
+  module.exports = this.League
 };
