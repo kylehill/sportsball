@@ -2,9 +2,32 @@
 <html>
 <head>
   <title>National Sportsball League</title>
+  <link rel="stylesheet" href="standings.css" />
 </head>
 <body>
 
+  <table id="standings">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Team</th>
+        <th>Pld</th>
+        <th>W</th>
+        <th>L</th>
+        <th>T</th>
+        <th>Pts</th>
+        <th>F</th>
+        <th>A</th>
+        <th>Diff</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <button id="next">Play Next</button>
+  <button id="week">Play Week</button>
+  
   <script src="libs/zepto.min.js"></script>
   <script src="libs/lodash.min.js"></script>
   
@@ -12,8 +35,24 @@
   <script src="js/player.js"></script>
   <script src="js/team.js"></script>
   <script src="js/game.js"></script>
-  <script src="js/season.js"></script>
   <script src="js/league.js"></script>
+
+  <script src="js/display.js"></script>
+
+  <template id="team-row">
+    <tr class="team">
+      <td class="rank"></td>
+      <td class="name"></td>
+      <td class="played"></td>
+      <td class="wins"></td>
+      <td class="losses"></td>
+      <td class="draws"></td>
+      <td class="points"></td>
+      <td class="for"></td>
+      <td class="against"></td>
+      <td class="diff"></td>
+    </tr>
+  </template>
 
 </body>
 </html>

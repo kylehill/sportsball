@@ -2,7 +2,11 @@
 
   var idCounter = 1
 
-  var Team = function() {
+  var Team = function(name) {
+
+    if (name) {
+      this.name = name
+    }
 
     this.setPlayer = function(index, position, min, max) {
       _players[index].set(position, min, max)
@@ -25,6 +29,7 @@
     this.display = function() {
       return {
         id: _id,
+        name: this.name,
         players: _players.map(function(p){
           return p.display()
         }),

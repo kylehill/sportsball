@@ -63,6 +63,8 @@
 
   var League = function(teams) {
 
+    teams = shuffle(teams)
+
     this.teams = teams.map(function(team){
       return team.display()
     })
@@ -78,7 +80,6 @@
 
     var standings = teams.map(function(team, i){
       return { 
-        index: i,
         gp: 0, 
         w: 0, 
         l: 0, 
@@ -137,7 +138,7 @@
       }
     }
 
-    this.playWeek = function() {
+    this.playRound = function() {
       if (unplayed.length) {
         var games = unplayed[0].length
         for (var i = 0; i < games; i++) {
@@ -149,7 +150,7 @@
     this.playAll = function() {
       var weeks = unplayed.length
       for (var i = 0; i < weeks; i++) {
-        this.playWeek()
+        this.playRound()
       }
     }
 
@@ -157,10 +158,11 @@
       var s = recalcStandings(standings, teams)
       return s.map(function(team){
         return { 
-          team: team.team.id,
+          team: team.team.name || team.team.id,
           points: team.record.pts,
           goals: team.record.gd + " (" + team.record.gf + "-" + team.record.ga + ")",
-          record: team.record.w + "-" + team.record.l + "-" + team.record.d
+          record: team.record.w + "-" + team.record.l + "-" + team.record.d,
+          raw: team.record
         }
       })
     }

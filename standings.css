@@ -1,0 +1,33 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+table {
+  border-collapse: collapse;
+  width: 65%;
+  margin: 0px auto;
+}
+
+td, th {
+  border: solid 1px #aaa;
+  padding: .4em;
+  text-align: center;
+  font-size: 90%;
+}
+
+th {
+  background: #f2f2f2;
+  padding: .2em;
+}
+
+tbody tr:first-child {
+  background: #CFC;
+}
+
+tbody tr:last-child {
+  background: #FCC;
+}
+
+td.rank, td.points, td.diff {
+  font-weight: bold;
+}
