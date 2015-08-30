@@ -1,4 +1,3 @@
-var Statistic = require("../js/statistic")
 var Player = require("../js/player")
 var expect = require("chai").expect
 
@@ -26,7 +25,7 @@ describe("Player", function(){
 
   it("should have a (modified) getter", function(){
 
-    expect(p.display()).to.have.keys(["stats", "injuries", "lefty"])
+    expect(p.display()).to.have.keys(["stats", "injuries", "lefty", "id"])
     
     expect(p.display().lefty).to.be.a("boolean")
     expect(p.display().injuries).to.be.a("number")

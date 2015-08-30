@@ -1,5 +1,7 @@
 (function(scope, undefined){
 
+  var idCounter = 1
+
   var Player = function() {
 
     this.display = function() {
@@ -11,7 +13,8 @@
           c: _stats.c.toString()
         },
         injuries: _injuries,
-        lefty: _lefty
+        lefty: _lefty,
+        id: _id
       }
     }
 
@@ -68,6 +71,8 @@
 
     var _lefty = !!(Math.random() > .5)
     var _injuries = 0
+
+    var _id = idCounter++
 
   }
 
