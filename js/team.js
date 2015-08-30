@@ -1,5 +1,7 @@
 (function(scope, undefined){
 
+  var idCounter = 1
+
   var Team = function() {
 
     this.setPlayer = function(index, position, min, max) {
@@ -22,6 +24,7 @@
 
     this.display = function() {
       return {
+        id: _id,
         players: _players.map(function(p){
           return p.display()
         }),
@@ -89,6 +92,8 @@
       rw: 4,
       c: 5
     }
+
+    var _id = idCounter++
 
   }
 
