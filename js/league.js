@@ -80,6 +80,7 @@
 
     var standings = teams.map(function(team, i){
       return { 
+        index: i,
         gp: 0, 
         w: 0, 
         l: 0, 
