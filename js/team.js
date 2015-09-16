@@ -14,7 +14,11 @@
     "ASC", 
     "SC", 
     "Sportsball", 
-    "Port" 
+    "Port",
+    "Fort",
+    "Ward",
+    "Real",
+    "Lake"
   ]
   var cities = [ 
     "Fordington", 
@@ -34,11 +38,27 @@
     "Canela Vista",
     "Kinnikinnick",
     "Harrisfield",
-    "Richterton",
+    "Richtertown",
     "Los Espinazos",
     "Corton",
     "Ropersvale",
-    "Pashockshin"
+    "Pashockshin",
+    "Jeffersonville",
+    "Erewhon",
+    "Tesiphon",
+    "Dortanburg",
+    "Underbridge",
+    "Hithan",
+    "Ponce",
+    "Summer's Rest",
+    "Archerdale",
+    "Stratton Falls",
+    "Pitchfield",
+    "Pascague",
+    "Kromerheim",
+    "Daversbruck",
+    "Hanson Park",
+    "Grolton"
   ]
   var suffixes = [ 
     "SC", 
@@ -49,14 +69,36 @@
     "Reds", 
     "Blues", 
     "Greens", 
-    "Golds", 
+    "Golds",
+    "Oranges",
     "Red Star", 
     "Blue Star", 
     "Green Star", 
-    "Gold Star", 
+    "Gold Star",
+    "Orange Star",
     "Maritime", 
-    "Phoenix", 
     "Heights",
+    "Continental",
+    "International",
+    "Sixes",
+    "Diamonds",
+    "Beach",
+    "Social",
+    "Phoenix", 
+    "Rovers",
+    "Tigers",
+    "Lions",
+    "Bears",
+    "Hawks",
+    "Crows",
+    "Cats",
+    "Growlers",
+    "Nuclear",
+    "Old Boys",
+    "'" + (Math.ceil(Math.random() * 89) + 10),
+    "'" + (Math.ceil(Math.random() * 89) + 10),
+    "'" + (Math.ceil(Math.random() * 89) + 10),
+    "'" + (Math.ceil(Math.random() * 89) + 10),
     "'" + (Math.ceil(Math.random() * 89) + 10)
   ]
 
@@ -72,17 +114,17 @@
 
   var randomName = function() {
     cities = shuffle(cities)
-      
-    if (Math.random() > .9) {
+    prefixes = shuffle(prefixes)
+    suffixes = shuffle(suffixes)
+       
+    if (Math.random() > .85) {
       return cities[0]
     }
 
     if (Math.random() > .5) {
-      prefixes = shuffle(prefixes)
       return prefixes[0] + " " + cities[0]
     }
 
-    suffixes = shuffle(suffixes)
     return cities[0] + " " + suffixes[0]
   }
 
