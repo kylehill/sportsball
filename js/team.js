@@ -2,12 +2,94 @@
 
   var idCounter = 1
 
-  var Team = function(name) {
+  var prefixes = [ 
+    "St.", 
+    "North", 
+    "South", 
+    "Central", 
+    "West", 
+    "East", 
+    "New", 
+    "Old", 
+    "ASC", 
+    "SC", 
+    "Sportsball", 
+    "Port" 
+  ]
+  var cities = [ 
+    "Fordington", 
+    "Padget", 
+    "Waterford", 
+    "Miller", 
+    "Boynesville", 
+    "Couraway", 
+    "Rippington", 
+    "Adlingville", 
+    "Smithton Springs", 
+    "Point Margaret", 
+    "Tooblett", 
+    "Outways", 
+    "Banestow", 
+    "Rigadane", 
+    "Canela Vista",
+    "Kinnikinnick",
+    "Harrisfield",
+    "Richterton",
+    "Los Espinazos",
+    "Corton",
+    "Ropersvale",
+    "Pashockshin"
+  ]
+  var suffixes = [ 
+    "SC", 
+    "United", 
+    "City",
+    "Town",
+    "Sportsball", 
+    "Reds", 
+    "Blues", 
+    "Greens", 
+    "Golds", 
+    "Red Star", 
+    "Blue Star", 
+    "Green Star", 
+    "Gold Star", 
+    "Maritime", 
+    "Phoenix", 
+    "Heights",
+    "'" + (Math.ceil(Math.random() * 89) + 10)
+  ]
 
-    if (name) {
-      this.name = name
+  var shuffle = function(array) {
+    var out = []
+    while (array.length) {
+      var index = Math.floor(Math.random() * array.length)
+      var removed = array.splice(index, 1)
+      out.push(removed[0])
+    }
+    return out
+  }
+
+  var randomName = function() {
+    cities = shuffle(cities)
+      
+    if (Math.random() > .9) {
+      return cities[0]
     }
 
+    if (Math.random() > .5) {
+      prefixes = shuffle(prefixes)
+      return prefixes[0] + " " + cities[0]
+    }
+
+    suffixes = shuffle(suffixes)
+    return cities[0] + " " + suffixes[0]
+  }
+
+  var Team = function(name) {
+
+    this.name = name || randomName()
+    
     this.setPlayer = function(index, position, min, max) {
       _players[index].set(position, min, max)
     }
