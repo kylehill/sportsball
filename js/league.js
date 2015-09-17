@@ -32,7 +32,17 @@
       var away = (indexes[indexes.length - (i + 1)] !== false)
 
       if (home && away) {
-        round.push(shuffle([ indexes[i], (indexes[indexes.length - (i + 1)]) ]))
+        var teams = shuffle([ indexes[i], (indexes[indexes.length - (i + 1)]) ])
+        round.push({
+          home: teams[0],
+          away: teams[1],
+          played: false,
+          result: "",
+          score: {
+            home: 0,
+            away: 0
+          }
+        })
       }
     }
 
@@ -76,7 +86,13 @@
       schedule.push(createRound(teams, i))
     }
 
-    this.schedule = shuffle(schedule)
+    this.schedule = shuffle(schedule).map(function(round, r){
+      return round.map(function(fixture, f){
+        fixture.round = r
+        fixture.match = f
+        return fixture
+      })
+    })
 
     var standings = teams.map(function(team, i){
       return { 
@@ -100,14 +116,14 @@
       }
       var game = unplayed[0].shift()
       
-      var homeIndex = game[0]
-      var awayIndex = game[1]
+      var homeIndex = game.home
+      var awayIndex = game.away
       var home = teams[homeIndex]
       var away = teams[awayIndex]
       
-      game = Game.play(home, away)
+      var res = Game.play(home, away)
 
-      switch (game.result) {
+      switch (res.result) {
         case "home":
           standings[homeIndex].w++
           standings[homeIndex].pts += 3
@@ -127,12 +143,16 @@
 
       standings[homeIndex].gp++
       standings[awayIndex].gp++
-      standings[homeIndex].gf += game.home
-      standings[awayIndex].gf += game.away
-      standings[homeIndex].ga += game.away
-      standings[awayIndex].ga += game.home
-      standings[homeIndex].gd += (game.home - game.away)
-      standings[awayIndex].gd += (game.away - game.home)
+      standings[homeIndex].gf += res.home
+      standings[awayIndex].gf += res.away
+      standings[homeIndex].ga += res.away
+      standings[awayIndex].ga += res.home
+      standings[homeIndex].gd += (res.home - res.away)
+      standings[awayIndex].gd += (res.away - res.home)
+
+      this.schedule[game.round][game.match].played = true
+      this.schedule[game.round][game.match].score.home = res.home
+      this.schedule[game.round][game.match].score.away = res.away
       
       if (unplayed[0].length === 0) {
         unplayed.shift()
@@ -157,15 +177,28 @@
 
     this.display = function() {
       var s = recalcStandings(standings, teams)
-      return s.map(function(team){
-        return { 
-          team: team.team.name || team.team.id,
-          points: team.record.pts,
-          goals: team.record.gd + " (" + team.record.gf + "-" + team.record.ga + ")",
-          record: team.record.w + "-" + team.record.l + "-" + team.record.d,
-          raw: team.record
-        }
-      })
+      return {
+        standings: s.map(function(team){
+          return { 
+            team: team.team.name || team.team.id,
+            points: team.record.pts,
+            goals: team.record.gd + " (" + team.record.gf + "-" + team.record.ga + ")",
+            record: team.record.w + "-" + team.record.l + "-" + team.record.d,
+            raw: team.record
+          }
+        }),
+        fixtures: this.schedule.map(function(round){
+          return round.map(function(fixture){
+            return {
+              home: teams[fixture.home].name,
+              away: teams[fixture.away].name,
+              result: (fixture.played 
+                ? fixture.score.home + " - " + fixture.score.away
+                : " - ")
+            }
+          })
+        })
+      }
     }
   }
 

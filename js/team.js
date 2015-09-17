@@ -58,7 +58,10 @@
     "Kromerheim",
     "Daversbruck",
     "Hanson Park",
-    "Grolton"
+    "Grolton",
+    "Lumbardshire",
+    "Feckington",
+    "Maul's"
   ]
   var suffixes = [ 
     "SC", 

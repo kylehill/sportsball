@@ -31,3 +31,38 @@ tbody tr:last-child {
 td.rank, td.points, td.diff {
   font-weight: bold;
 }
+
+#fixtures, #buttons, #schedule-buttons {
+  width: 65%;
+  margin: 10px auto;
+}
+
+.fixture {
+  padding: 10px;
+  font-size: 0px;
+}
+
+.fixture:not(:last-child) {
+  border-bottom: solid 1px gray;
+}
+
+.home, .away {
+  display: inline-block;
+  width: 45%;
+  font-size: 16px;
+}
+
+.result {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 16px;
+  width: 10%;
+}
+
+.away {
+  text-align: right;
+}
+
+.result {
+  text-align: center;
+}

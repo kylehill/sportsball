@@ -1,9 +1,13 @@
+var lg
+
 $(function(){
 
-  var display = function(standings) {
+  var current_week = 0
+
+  var display = function(display) {
     $("#standings tbody").empty()
 
-    standings.forEach(function(team, i){
+    display.standings.forEach(function(team, i){
       var $row = $($("#team-row").html())
       
       $row.find(".rank").text(i + 1)
@@ -19,9 +23,22 @@ $(function(){
 
       $("#standings tbody").append($row)
     })
+
+    $("#fixtures .container").empty()
+    $("#round_num").text(current_week + 1)
+
+    display.fixtures[current_week].forEach(function(fixture){
+      var $row = $($("#fixture-row").html())
+
+      $row.find(".home").text(fixture.home)
+      $row.find(".result").text(fixture.result)
+      $row.find(".away").text(fixture.away)
+
+      $("#fixtures .container").append($row)
+    })
   }
 
-  var lg = League.random(12)
+  lg = League.random(12)
   display(lg.display())
 
   $("#next").on("click", function(){
@@ -34,4 +51,13 @@ $(function(){
     display(lg.display())
   })
 
+  $("#prev_sched").on("click", function(){
+    current_week = Math.max(0, current_week - 1)    
+    display(lg.display())
+  })
+
+  $("#next_sched").on("click", function(){
+    current_week = Math.min(lg.display().fixtures.length - 1, current_week + 1)
+    display(lg.display())
+  })
 })
