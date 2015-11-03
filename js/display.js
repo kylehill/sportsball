@@ -38,7 +38,7 @@ $(function(){
     })
   }
 
-  lg = League.random(12)
+  lg = League.random(12, 22)
   display(lg.display())
 
   $("#next").on("click", function(){

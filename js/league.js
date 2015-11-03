@@ -71,7 +71,9 @@
     })
   }
 
-  var League = function(teams) {
+  var League = function(teams, rounds) {
+
+    rounds = rounds || ((Math.ceil(teams.length / 2) * 2) - 1)
 
     teams = shuffle(teams)
 
@@ -81,7 +83,7 @@
 
     var schedule = []
     for (var i = 0; 
-        i < (Math.ceil(teams.length / 2) * 2) - 1; 
+        i < rounds; 
         i++) {
       schedule.push(createRound(teams, i))
     }
@@ -204,16 +206,16 @@
 
   var LeagueFactory = {
 
-    random: function(size) {
+    random: function(size, rounds) {
       var teams = []
       for (var i = 0; i < size; i++) {
         teams.push(new Team())
       }
-      return this.create(teams)
+      return this.create(teams, rounds)
     },
 
-    create: function(teams) {
-      return new League(teams)
+    create: function(teams, rounds) {
+      return new League(teams, rounds)
     }
 
   }

@@ -21,7 +21,8 @@ describe("Team", function(){
       "roll",
       "injury",
       "release",
-      "change"
+      "change",
+      "name"
     ])
 
   })
@@ -30,7 +31,7 @@ describe("Team", function(){
     var d = t.display()
 
     expect(d).to.be.an("object")
-    expect(d).to.have.keys(["players", "positions", "id"])
+    expect(d).to.have.keys(["players", "positions", "id", "name"])
   })
 
   it("should have a set player function", function(){
